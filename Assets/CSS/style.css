@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: greenyellow;
+    padding: 0;
+    margin: 0;
+}
+
+.startBtn {
+    display: flex;
+    flex: flex-wrap;
+    justify-content: center;
+}
+
+#quizBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    max-width: 80%;
+    height: 550px;
+    background: white;
+    border-radius: 5px;
+    padding:10px;
+    box-shadow: 0 0 10px 2px;
+    margin: auto;  
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    margin: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
