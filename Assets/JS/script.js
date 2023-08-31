@@ -1,12 +1,3 @@
-/*
-    CODE EXAMPLE FOR MODULE 4:
-    - REFERENCE activity 18 for how you get list of questions to render
-    - Replace navigate method with version below.
-*/
-
-
-  
-
 var carousel = document.querySelector("#quizBox");
 var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");
@@ -46,38 +37,55 @@ function startTimer() {
    }, 1000);
 };
 
+// Render Questions
 function renderQuestion() {
     // Update the html with the current question
    questionElement.textContent = questions[0].question;
    
   }
 
-
+// Render Responses
 function renderResponses() {
    responseElement.innerHTML = "";
    for (var i = 0; i < questions[0].responses.length; i++ ) {
    console.log(questions[0].responses[i]);
    var li = document.createElement("li");
    li.textContent = questions[0].responses[i];
+   li.addEventListener("click", function(event) {
+    handleResponseClick(event.target.textContent)
+   });
    responseElement.appendChild(li);
    }
 }
 
+// Handle Click Event
+function handleResponseClick(clickedResponse) {
+    var currentQuestion = questions[index];
+    if (clickedResponse === currentQuestion.responses[currentQuestion.answer]) {
+        console.log("Correct answer!");
+    } else {
+        console.log("Incorrect answer.");
+    }
+ 
+    // Navigate to the next question
+    navigate(1);
+    renderQuestionAndResponses();
+ };
+ 
 
-
-// Generate your data/carousel
+// Generate questions
 var questions = [
    { question: "What is a function?", 
      responses: [ "Resuable code", "Primitive value", "None of the above" ], answer: 0 },
-    { question: "What is an array", 
+    { question: "What is an array?", 
     responses: [ "List of values", "Key value pairs", "None of the above" ], answer: 2 },
-    { question: "What is a primitive value ", 
+    { question: "What is a primitive value?", 
     responses: [ "123", "1234", "None of the above" ], answer: 2 },
-    { question: "What is the abbreviation JSON", 
+    { question: "What is the abbreviation JSON?", 
     responses: [ "JASON", "Javascript notation object", "None of the above" ], answer: 1 },
   ];
 
-//    Carousel
+// Carousel
 
 next.addEventListener("click", function() {
    navigate(1);
@@ -89,6 +97,7 @@ prev.addEventListener("click", function() {
    renderQuestionAndResponses();
 });
 
+// Render Questions and Responses
 function renderQuestionAndResponses() {
    var question = questions[index];
    questionElement.textContent = question.question;
@@ -118,4 +127,3 @@ function navigate(direction) {
     
    }
 
-renderQuestionAndResponses();
