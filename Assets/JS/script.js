@@ -4,92 +4,118 @@
     - Replace navigate method with version below.
 */
 
-/*
-    HTML REFERENCE
-    <p id="question"></p>
-    <ul id="responses"></ul>
-*/
 
+  
+
+var carousel = document.querySelector("#quizBox");
+var next = document.querySelector(".next");
+var prev = document.querySelector(".prev");
+
+// Start Button
 var startBtn = document.querySelector('.startBtn');
+startBtn.addEventListener('click', startGame)
 
+// Q & A
 var questionElement = document.querySelector("#question");
 var responseElement = document.querySelector("#responses");
 var index = 0;
 
-let shuffledQuestions, currentQuestionIndex;
-
-startBtn.addEventListener('click', startGame);
+var timerElement = document.querySelector(".timerSec");
 
 function startGame() {
-    console.log('game started');
-    startBtn.classList.add('hide');
-    question.classList.remove('hide');
-    responses.classList.remove('hide');
-    renderQuestion();
+   console.log('game started');
+   startBtn.classList.add('hide');
+   questionElement.classList.remove('hide');
+   responseElement.classList.remove('hide');
+   renderQuestion();
+   renderResponses();
+   startTimer();
 }
 
 function startTimer() {
-    var counter = 5;
-    serInterval(function() {
-        counter--;
-    })
+   var counter = 90;
+   var timerInterval = setInterval(function() {
+       counter--;
+       if (counter >= 0) {
+           // Update HTML with current counter value
+           timerElement.innerHTML = "Time remaining: " + counter;
+       } else {
+           // Stop timer 
+           clearInterval(timerInterval)
+       }
+   }, 1000);
 };
 
-  function renderQuestion() {
-     // Update the html with the current question
-    questionElement.textContent = questions[0].question;
-    
-   }
-  
+function renderQuestion() {
+    // Update the html with the current question
+   questionElement.textContent = questions[0].question;
+   
+  }
+
+
 function renderResponses() {
-    for (var i = 0; i < questions[index].responses.length; i++ )
+   responseElement.innerHTML = "";
+   for (var i = 0; i < questions[0].responses.length; i++ ) {
+   console.log(questions[0].responses[i]);
+   var li = document.createElement("li");
+   li.textContent = questions[0].responses[i];
+   responseElement.appendChild(li);
+   }
 }
+
+
 
 // Generate your data/carousel
 var questions = [
-    { question: "What is a function?", 
-      responses: [ "Resuable code", "Primitive value", "None of the above" ], answer: 0 },
-     { question: "What is an array", responses: [ "List of values", "Key value pairs", "None of the above" ], answer: 2 },
-     { question: "What is a primitive value ", responses: [ "123", "1234", "None of the above" ], answer: 2 },
-     { question: "What is the abbreviation JSON", responses: [ "JASON", "Javascript notation object", "None of the above" ], answer: 1 },
-   ];
-  
-  
-//   // Navigate through list of questions
-//   function navigate(direction) {
-//     index = index + direction;
-//     // If you try to navigate 'back' from the start
-//     // Go to last question
-//     if (index < 0) { 
-//       index = images.length - 1; 
-    
-//       // If you are at the very end. 
-//       // Go to the first image/question
-//     } else if (index > images.length - 1) { 
-//       index = 0;
-//     }
+   { question: "What is a function?", 
+     responses: [ "Resuable code", "Primitive value", "None of the above" ], answer: 0 },
+    { question: "What is an array", 
+    responses: [ "List of values", "Key value pairs", "None of the above" ], answer: 2 },
+    { question: "What is a primitive value ", 
+    responses: [ "123", "1234", "None of the above" ], answer: 2 },
+    { question: "What is the abbreviation JSON", 
+    responses: [ "JASON", "Javascript notation object", "None of the above" ], answer: 1 },
+  ];
+
+//    Carousel
+
+next.addEventListener("click", function() {
+   navigate(1);
+   renderQuestionAndResponses();
+});
+
+prev.addEventListener("click", function() {
+   navigate(-1);
+   renderQuestionAndResponses();
+});
+
+function renderQuestionAndResponses() {
+   var question = questions[index];
+   questionElement.textContent = question.question;
    
-//     // Render the question
-//     renderQuestion();
-//     // render the answer
-//     renderAnswers();
-//   }
+   responseElement.innerHTML = ""; // Clear previous responses
+   for (var i = 0; i < question.responses.length; i++) {
+       var li = document.createElement("li");
+       li.textContent = question.responses[i];
+       responseElement.appendChild(li);
+   }
+}
   
-//   // renders the question
-//   function renderQuestion() {
-//     // Update the html with the current question
-//     questionElement.textContent = questions[index].question;
-//   }
-  
-//   function renderAnswers() {
-//     console.log("questions object",questions[index]);
-//     console.log("list of responses", questions[index].responses);
-//     // Clears the html by settting innerHTML to an empty string.
-//     questionResponseElement.innerHTML = "";
-//     for (var i = 0; i < questions[index].responses.length; i++ ) {
-//       console.log(questions[index].responses[i]);
-//       var li = document.createElement("li");
-//       li.textContent = questions[index].responses[i];
-//       questionResponseElement.appendChild(li);
-//     }
-//   }
+//    // Navigate through list of questions
+
+function navigate(direction) {
+   index = index + direction;
+     // If you try to navigate 'back' from the start
+    // Go to last question
+   if (index < 0) { 
+     index = questions.length - 1; 
+   }
+      // If you are at the very end. 
+      // Go to the first image/question
+      else if (index > questions.length - 1) { 
+      index = 0;
+    }
+    
+   }
+
+renderQuestionAndResponses();

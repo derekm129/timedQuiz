@@ -8,6 +8,10 @@ body {
     margin: 0;
 }
 
+.timerSec {
+    margin: 10px;
+}
+
 .startBtn {
     display: flex;
     flex: flex-wrap;
@@ -29,7 +33,7 @@ body {
 }
 
 .btn-grid {
-    display: grid;
+    display: table-column;
     grid-template-columns: repeat(2, auto);
     margin: 20px;
 }
