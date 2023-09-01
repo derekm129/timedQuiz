@@ -1,9 +1,15 @@
+// Variables
 var carousel = document.querySelector("#quizBox");
 var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");
-var scoreBox = document.querySelector(".scoreBox");
-var initials = document.querySelector(".initials");
-
+var scoreBox = document.querySelector("#scoreBox");
+var initials = document.querySelector("#initialsBox");
+var questionElement = document.querySelector("#question");
+var responseElement = document.querySelector("#responses");
+var index = 0;
+var score = 0;
+var counter = 90;
+var timerElement = document.querySelector(".timerSec");
 
 // Start Button
 var startBtn = document.querySelector('.startBtn');
@@ -16,14 +22,7 @@ submit.addEventListener("click", function() {
     // Set local Storage
 } );
 
-// Q & A
-var questionElement = document.querySelector("#question");
-var responseElement = document.querySelector("#responses");
-var index = 0;
-var score = 0;
-var counter = 90;
 
-var timerElement = document.querySelector(".timerSec");
 
 // Start Game Function
 function startGame() {
@@ -45,7 +44,7 @@ function startTimer() {
            timerElement.innerHTML = "Time remaining: " + counter;
        } else {
            // Stop timer 
-           clearInterval(timerInterval)
+           clearInterval(timerInterval);
        }
    }, 1000);
 };
@@ -155,7 +154,10 @@ function navigate(direction) {
 function endGame() {
     // Give Score 
     quizBox.style.display = "none";
+    timerElement.style.display="none";
+    scoreBox.classList.remove("hide");
     scoreBox.textContent = score;
-
     // Ask for initials
+    initialsBox.classList.remove("hide");
+    clearInterval(startTimer);
 }
