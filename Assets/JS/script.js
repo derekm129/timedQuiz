@@ -4,12 +4,14 @@ var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");
 var scoreBox = document.querySelector("#scoreBox");
 var scoreTitle = document.querySelector("#scoreTitle");
-var initials = document.querySelector("#initialsBox");
+var initialsBox = document.querySelector("#initialsBox");
 var questionElement = document.querySelector("#question");
 var responseElement = document.querySelector("#responses");
+var resultsBox = document.querySelector("#resultsBox");
+var initialsBox = document.querySelector("#initialsBox");
 var index = 0;
 var score = 0;
-var counter = 90;
+var counter = 60;
 var timerElement = document.querySelector(".timerSec");
 
 // Start Button
@@ -17,13 +19,15 @@ var startBtn = document.querySelector('.startBtn');
 startBtn.addEventListener('click', startGame)
 
 // Submit Button
-var submit = document.querySelector("#submit");
-submit.addEventListener("click", function() {
-    console.log("info saved");
+function submit() {
     // Set local Storage
-} );
-
-
+    document.getElementById("initials").value;
+    localStorage.setItem("yourScore", score);
+    localStorage.setItem("initials", document.getElementById("initials").value);
+    console.log(document.getElementById("initials").value);
+    console.log(score);
+    results();
+}
 
 // Start Game Function
 function startGame() {
@@ -107,18 +111,6 @@ var questions = [
     responses: [ "JASON", "Javascript notation object", "None of the above" ], answer: 1 },
   ];
 
-// Carousel
-
-// next.addEventListener("click", function() {
-//    navigate(1);
-//    renderQuestionAndResponses();
-// });
-
-// prev.addEventListener("click", function() {
-//    navigate(-1);
-//    renderQuestionAndResponses();
-// });
-
 // Render Questions and Responses
 function renderQuestionAndResponses() {
    var question = questions[index];
@@ -163,3 +155,14 @@ function endGame() {
     // Ask for initials
     initialsBox.classList.remove("hide");
 }
+
+// Render Initials and Score
+function results() {
+    // if (submit()) {
+    scoreTitle.style.display = "none";
+    scoreBox.style.display = "none";
+    initials.style.display = "none";
+    resultsBox.textContent = localStorage.getItem("yourScore");
+    initialsBox.textContent = localStorage.getItem("initials");
+    localStorage.getItem("initials");
+    }
