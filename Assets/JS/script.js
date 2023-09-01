@@ -3,6 +3,7 @@ var carousel = document.querySelector("#quizBox");
 var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");
 var scoreBox = document.querySelector("#scoreBox");
+var scoreTitle = document.querySelector("#scoreTitle");
 var initials = document.querySelector("#initialsBox");
 var questionElement = document.querySelector("#question");
 var responseElement = document.querySelector("#responses");
@@ -155,9 +156,10 @@ function endGame() {
     // Give Score 
     quizBox.style.display = "none";
     timerElement.style.display="none";
+    scoreTitle.classList.remove("hide");
+    scoreTitle.textContent = "Your Score";
     scoreBox.classList.remove("hide");
     scoreBox.textContent = score;
     // Ask for initials
     initialsBox.classList.remove("hide");
-    clearInterval(startTimer);
 }

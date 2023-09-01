@@ -32,6 +32,39 @@ body {
     margin: auto;  
 }
 
+#scoreTitle {
+    border: 3px solid;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    background-color: white;
+    width: 100px;
+    height: 35px;
+  }
+
+#scoreBox {
+    border: 3px solid;
+    position: absolute;
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    background-color: white;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+}
+
+#initialsBox {
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
 .buttons {
     display: table-column;
     grid-template-columns: repeat(2, auto);
