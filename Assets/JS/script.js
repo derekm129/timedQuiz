@@ -1,27 +1,36 @@
-/*
-    CODE EXAMPLE FOR MODULE 4:
-    - REFERENCE activity 18 for how you get list of questions to render
-    - Replace navigate method with version below.
-*/
-
-
-  
-
+// Variables
 var carousel = document.querySelector("#quizBox");
 var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");
+var scoreBox = document.querySelector("#scoreBox");
+var scoreTitle = document.querySelector("#scoreTitle");
+var initialsBox = document.querySelector("#initialsBox");
+var questionElement = document.querySelector("#question");
+var responseElement = document.querySelector("#responses");
+var resultsBox = document.querySelector("#resultsBox");
+var initialsBox = document.querySelector("#initialsBox");
+var yourInitials = document.querySelector("#yourInitials");
+var index = 0;
+var score = 0;
+var counter = 60;
+var timerElement = document.querySelector(".timerSec");
 
 // Start Button
 var startBtn = document.querySelector('.startBtn');
 startBtn.addEventListener('click', startGame)
 
-// Q & A
-var questionElement = document.querySelector("#question");
-var responseElement = document.querySelector("#responses");
-var index = 0;
+// Submit Button
+function submit() {
+    // Set local Storage
+    document.getElementById("initials").value;
+    localStorage.setItem("yourScore", score);
+    localStorage.setItem("initials", document.getElementById("initials").value);
+    console.log(document.getElementById("initials").value);
+    console.log(score);
+    results();
+}
 
-var timerElement = document.querySelector(".timerSec");
-
+// Start Game Function
 function startGame() {
    console.log('game started');
    startBtn.classList.add('hide');
@@ -32,8 +41,8 @@ function startGame() {
    startTimer();
 }
 
+// Start Timer
 function startTimer() {
-   var counter = 90;
    var timerInterval = setInterval(function() {
        counter--;
        if (counter >= 0) {
@@ -41,18 +50,19 @@ function startTimer() {
            timerElement.innerHTML = "Time remaining: " + counter;
        } else {
            // Stop timer 
-           clearInterval(timerInterval)
+           clearInterval(timerInterval);
        }
    }, 1000);
 };
 
+// Render Questions
 function renderQuestion() {
     // Update the html with the current question
    questionElement.textContent = questions[0].question;
    
   }
 
-
+// Render Responses
 function renderResponses() {
    responseElement.innerHTML = "";
    for (var i = 0; i < questions[0].responses.length; i++ ) {
@@ -63,32 +73,46 @@ function renderResponses() {
    }
 }
 
+// Handle Click Event
+function handleResponseClick(clickedResponse) {
+    var currentQuestion = questions[index];
+    if (clickedResponse === currentQuestion.responses[currentQuestion.answer]) {
+        console.log("Correct answer!");
+        score += 5;
+    } else {
+        console.log("Incorrect answer.");
+        counter -= 10;
+        // Subtract 10 seconds from timer
+    }
+ 
+    // Navigate to the next question
+    navigate(1);
+ };
+ 
+//  Response event listener
+responseElement.addEventListener("click", function(event) {
+    console.log(event.target.tagName);
+    if (event.target.tagName = "LI") {
+      handleResponseClick(event.target.textContent);  
+    }
+})
 
-
-// Generate your data/carousel
+// Generate questions
 var questions = [
-   { question: "What is a function?", 
-     responses: [ "Resuable code", "Primitive value", "None of the above" ], answer: 0 },
-    { question: "What is an array", 
-    responses: [ "List of values", "Key value pairs", "None of the above" ], answer: 2 },
-    { question: "What is a primitive value ", 
-    responses: [ "123", "1234", "None of the above" ], answer: 2 },
-    { question: "What is the abbreviation JSON", 
-    responses: [ "JASON", "Javascript notation object", "None of the above" ], answer: 1 },
+   { question: "What is CSS for?", 
+     responses: [ "Styling HTML documents.", "Setting links to websites.", "Creating functions." ], answer: 0 },
+
+    { question: "What is an array?", 
+    responses: [ "An advanced calculator.", "True or false statements.", "A data structure consisting of a collection of elements." ], answer: 2 },
+
+    { question: "What is a variable?", 
+    responses: [ "Data type used to represent text.", "A block of code designed for a particular task.", "A container for storing data." ], answer: 2 },
+
+    { question: "What is the abbreviation HTML?", 
+    responses: [ "Helix Tech Machine Learning", "HyperText Markup Language", "Hot Tamale Meat Lasagna" ], answer: 1 },
   ];
 
-//    Carousel
-
-next.addEventListener("click", function() {
-   navigate(1);
-   renderQuestionAndResponses();
-});
-
-prev.addEventListener("click", function() {
-   navigate(-1);
-   renderQuestionAndResponses();
-});
-
+// Render Questions and Responses
 function renderQuestionAndResponses() {
    var question = questions[index];
    questionElement.textContent = question.question;
@@ -101,7 +125,7 @@ function renderQuestionAndResponses() {
    }
 }
   
-//    // Navigate through list of questions
+// Navigate through list of questions
 
 function navigate(direction) {
    index = index + direction;
@@ -113,9 +137,33 @@ function navigate(direction) {
       // If you are at the very end. 
       // Go to the first image/question
       else if (index > questions.length - 1) { 
-      index = 0;
+      endGame();
+    } else {
+        renderQuestionAndResponses();
     }
     
    }
 
-renderQuestionAndResponses();
+// End Game Function
+function endGame() {
+    // Give Score 
+    quizBox.style.display = "none";
+    timerElement.style.display="none";
+    scoreTitle.classList.remove("hide");
+    scoreTitle.textContent = "Your Score";
+    scoreBox.classList.remove("hide");
+    scoreBox.textContent = score;
+    // Ask for initials
+    initialsBox.classList.remove("hide");
+}
+
+// Display Initials and Score
+function results() {
+    resultsBox.classList.remove("hide");
+    scoreTitle.style.display = "none";
+    scoreBox.style.display = "none";
+    initials.style.display = "none";
+    resultsBox.textContent = "Your score: " + localStorage.getItem("yourScore");
+    initialsBox.textContent = "Your initials: " + localStorage.getItem("initials");
+    localStorage.getItem("initials");
+    }

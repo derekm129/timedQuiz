@@ -13,54 +13,44 @@
 <header>
     <h1>Ultimate Coding Quiz!</h1>
 
-    <div class="timer">
+    <div id="timer">
         <div class="timerSec"></div>
     </div>
 </header>
 
+<!-- QuizBox -->
 <div class="container">
     <div id="quizBox" class="hide">
     <!-- javascript questions -->
         <p id="question" class="hide">Question</p>
     <!-- javascript answers -->
-        <ul id="responses" class="btn-grid hide">
-            <li class="btn">Answer1</li>
-            <li class="btn">Answer2</li>
-            <li class="btn">Answer3</li>
-            <li class="btn">Answer4</li>
+        <ul id="responses" class="buttons hide">
+         
         </ul>
 
     <!-- Buttons -->
     <div class="controls">
-        <button id ="nextBtn" class="nextBtn btn hide">Next ▶</button>
         <button id="startBtn" class="startBtn btn">START</button>
     </div>
 </div>
 
-    
-   
-    
-<button class="prev">Previous</button>
-    
-<button class="next">Next</button>
-
-    
-  
-    
+<!-- Score Box -->
+<div id ="scoreTitle" class="hide"></div>
+<div id = "scoreBox" class="hide">
 </div>
 
+<!-- Initials -->
+<div id="initialsBox" class="hide">
+    <input id="initials" type="text" placeholder="Please enter your initials" value="">
+    <button id="submit" onClick="submit()">Submit</button>
+</div>
 
+<!-- Results -->
+<div id="resultsBox" class="resultsBox1 hide"></div>
+<div id="yourInitials" class="resultsBox2 hide"></div>
 
-<!-- footer
-<footer>
-
-</footer>
-
-<!-- results -->
-
-
+<!-- JavaScript Link -->
 <script src="./Assets/JS/script.js"></script>
 </body>
 
 </html>
-<!-- TEST-->
