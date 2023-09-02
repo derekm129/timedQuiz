@@ -99,17 +99,17 @@ responseElement.addEventListener("click", function(event) {
 
 // Generate questions
 var questions = [
-   { question: "What is a function?", 
-     responses: [ "Resuable code", "Primitive value", "None of the above" ], answer: 0 },
+   { question: "What is CSS for?", 
+     responses: [ "Styling HTML documents.", "Setting links to websites.", "Creating functions." ], answer: 0 },
 
     { question: "What is an array?", 
-    responses: [ "List of values", "Key value pairs", "None of the above" ], answer: 2 },
+    responses: [ "List of variables.", "True or false statements.", "Data structure consisting of a collection of elements" ], answer: 2 },
 
-    { question: "What is a primitive value?", 
-    responses: [ "123", "1234", "None of the above" ], answer: 2 },
+    { question: "What is a variable?", 
+    responses: [ "Data type used to represent text.", "A block of code designed for a particular task.", "A container for storing data." ], answer: 2 },
 
-    { question: "What is the abbreviation JSON?", 
-    responses: [ "JASON", "Javascript notation object", "None of the above" ], answer: 1 },
+    { question: "What is the abbreviation HTML?", 
+    responses: [ "Helix Tech Machine Learning", "HyperText Markup Language", "Hot Tamale Meat Lasagna" ], answer: 1 },
   ];
 
 // Render Questions and Responses
@@ -157,7 +157,7 @@ function endGame() {
     initialsBox.classList.remove("hide");
 }
 
-// Render Initials and Score
+// Display Initials and Score
 function results() {
     resultsBox.classList.remove("hide");
     scoreTitle.style.display = "none";
