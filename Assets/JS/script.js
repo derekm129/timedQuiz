@@ -9,6 +9,7 @@ var questionElement = document.querySelector("#question");
 var responseElement = document.querySelector("#responses");
 var resultsBox = document.querySelector("#resultsBox");
 var initialsBox = document.querySelector("#initialsBox");
+var yourInitials = document.querySelector("#yourInitials");
 var index = 0;
 var score = 0;
 var counter = 60;
@@ -158,11 +159,11 @@ function endGame() {
 
 // Render Initials and Score
 function results() {
-    // if (submit()) {
+    resultsBox.classList.remove("hide");
     scoreTitle.style.display = "none";
     scoreBox.style.display = "none";
     initials.style.display = "none";
-    resultsBox.textContent = localStorage.getItem("yourScore");
-    initialsBox.textContent = localStorage.getItem("initials");
+    resultsBox.textContent = "Your score: " + localStorage.getItem("yourScore");
+    initialsBox.textContent = "Your initials: " + localStorage.getItem("initials");
     localStorage.getItem("initials");
     }
