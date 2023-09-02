@@ -103,7 +103,7 @@ var questions = [
      responses: [ "Styling HTML documents.", "Setting links to websites.", "Creating functions." ], answer: 0 },
 
     { question: "What is an array?", 
-    responses: [ "List of variables.", "True or false statements.", "Data structure consisting of a collection of elements" ], answer: 2 },
+    responses: [ "An advanced calculator.", "True or false statements.", "A data structure consisting of a collection of elements." ], answer: 2 },
 
     { question: "What is a variable?", 
     responses: [ "Data type used to represent text.", "A block of code designed for a particular task.", "A container for storing data." ], answer: 2 },
