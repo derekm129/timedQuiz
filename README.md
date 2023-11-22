@@ -18,6 +18,7 @@ Use quiz to review basic coding concepts.
 ![Screenshot](./assets/images/quizScreenshot.png)
 
 https://derekm129.github.io/timedQuiz/
+
 ## Credits
 
 N/A

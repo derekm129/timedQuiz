@@ -14,10 +14,12 @@ var index = 0;
 var score = 0;
 var counter = 60;
 var timerElement = document.querySelector(".timerSec");
+var highScoreButton = document.getElementById("highScoreBtn");
+var highScoreBox = document.querySelector("#highScoreBox");
 
 // Start Button
 var startBtn = document.querySelector('.startBtn');
-startBtn.addEventListener('click', startGame)
+startBtn.addEventListener('click', startGame);
 
 // Submit Button
 function submit() {
@@ -28,7 +30,7 @@ function submit() {
     console.log(document.getElementById("initials").value);
     console.log(score);
     results();
-}
+};
 
 // Start Game Function
 function startGame() {
@@ -39,7 +41,7 @@ function startGame() {
    renderQuestion();
    renderResponses();
    startTimer();
-}
+};
 
 // Start Timer
 function startTimer() {
@@ -59,8 +61,7 @@ function startTimer() {
 function renderQuestion() {
     // Update the html with the current question
    questionElement.textContent = questions[0].question;
-   
-  }
+  };
 
 // Render Responses
 function renderResponses() {
@@ -70,8 +71,8 @@ function renderResponses() {
    var li = document.createElement("li");
    li.textContent = questions[0].responses[i];
    responseElement.appendChild(li);
-   }
-}
+   };
+};
 
 // Handle Click Event
 function handleResponseClick(clickedResponse) {
@@ -83,7 +84,7 @@ function handleResponseClick(clickedResponse) {
         console.log("Incorrect answer.");
         counter -= 10;
         // Subtract 10 seconds from timer
-    }
+    };
  
     // Navigate to the next question
     navigate(1);
@@ -94,8 +95,8 @@ responseElement.addEventListener("click", function(event) {
     console.log(event.target.tagName);
     if (event.target.tagName = "LI") {
       handleResponseClick(event.target.textContent);  
-    }
-})
+    };
+});
 
 // Generate questions
 var questions = [
@@ -122,8 +123,8 @@ function renderQuestionAndResponses() {
        var li = document.createElement("li");
        li.textContent = question.responses[i];
        responseElement.appendChild(li);
-   }
-}
+   };
+};
   
 // Navigate through list of questions
 
@@ -140,9 +141,9 @@ function navigate(direction) {
       endGame();
     } else {
         renderQuestionAndResponses();
-    }
+    };
     
-   }
+   };
 
 // End Game Function
 function endGame() {
@@ -155,7 +156,22 @@ function endGame() {
     scoreBox.textContent = score;
     // Ask for initials
     initialsBox.classList.remove("hide");
-}
+
+    // Store score in local storage
+    var highScore = JSON.parse(localStorage.getItem('highScore')) || [];
+    var existingHighScore = localStorage.getItem('highScore') || 0;
+    var initials = localStorage.getItem('initials');
+
+    localStorage.setItem('highScore', highScore);
+    localStorage.setItem('highScoreInitials', initials);
+
+    // Check if there's an existing high score
+    if (score > parseInt(existingHighScore)) {
+        localStorage.setItem('highScore', score);
+        localStorage.setItem('highScoreInitials', initials);
+        console.log(localStorage.getItem('highScoreInitials'));
+    };
+};
 
 // Display Initials and Score
 function results() {
@@ -165,5 +181,34 @@ function results() {
     initials.style.display = "none";
     resultsBox.textContent = "Your score: " + localStorage.getItem("yourScore");
     initialsBox.textContent = "Your initials: " + localStorage.getItem("initials");
-    localStorage.getItem("initials");
-    }
+    };
+
+// View High Score
+highScoreButton.addEventListener('click', viewHighScore);
+
+function viewHighScore() {
+    highScoreBox.classList.remove("hide");
+    quizBox.style.display = 'none';
+    initialsBox.style.display = 'none';
+    resultsBox.style.display = 'none';
+    timerElement.style.display = 'none';
+
+    var highScore = localStorage.getItem('highScore');
+    var highScoreInitials = localStorage.getItem('highScoreInitials');
+
+    if (highScore !== null && highScoreInitials !==null) {
+        highScoreBox.textContent = 'Highest Score: ' + highScore + ' by ' + highScoreInitials;
+    } else {
+       highScoreBox.textContent = 'No high score yet!';
+    };
+    // Back button
+    var backButton = document.createElement('button');
+    backButton.textContent = 'Back to Main Page';
+    backButton.addEventListener('click', function() {
+        // Code to navigate back to the main page or wherever you want to go
+        // For example, you might want to redirect to another HTML page:
+        window.location.href = 'index.html';
+    });
+
+    highScoreBox.appendChild(backButton);
+};
