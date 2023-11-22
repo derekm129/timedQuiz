@@ -201,4 +201,14 @@ function viewHighScore() {
     } else {
        highScoreBox.textContent = 'No high score yet!';
     };
+    // Back button
+    var backButton = document.createElement('button');
+    backButton.textContent = 'Back to Main Page';
+    backButton.addEventListener('click', function() {
+        // Code to navigate back to the main page or wherever you want to go
+        // For example, you might want to redirect to another HTML page:
+        window.location.href = 'index.html';
+    });
+
+    highScoreBox.appendChild(backButton);
 };

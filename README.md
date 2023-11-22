@@ -16,6 +16,7 @@ N/A
 Use quiz to review basic coding concepts.
 
 ![Screenshot](./assets/images/quizScreenshot.png)
+
 ## Credits
 
 N/A
